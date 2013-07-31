@@ -1,14 +1,16 @@
 <?php
   
-	//////////////////////////////////////////////////////////////////////////////////////
-	//								~~~~ToDo~~~~														//
-	//	Add RADIOSTREAM functionality													//
-	//			Chat only implemented - still want name							✔		//
-	//		Either check and reset, or just reset name.									//
-	//	Move chat message and command sends to functions?						✔		//
-	//		Add functionality to loop through if more than one radio exists?			//
-	//	Script crashes if disconnected TS tab open										//
-	//////////////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////////////////
+	//				~~~~ToDo~~~~						//
+	//	Add RADIOSTREAM functionality	~50%~						//
+	//			Chat only implemented - still want name				//
+	//		Either check and reset, or just reset name.				//
+	//	Move chat message and command sends to functions?				//
+	// Add functionality to loop through if more than one radio exists?			//
+	//											//
+	//				~~~Bugs~~~						//
+	// Script crashes if disconnected TS tab open 						//
+	//////////////////////////////////////////////////////////////////////////////////////////
 
 
 	//	Require authentication password
@@ -34,17 +36,17 @@
 	//	Unique ID of Radio (Settings > Identities > Unique ID)
 	$radioUID = "sjaohDZ0OPeS5UdmBgB1vZn94zA=";
 	
-	//////////////////////////////////////////////////////////////////////
-	//			Nothing should need editing below this point			//
-	//			(OK, maybe JUST the find and replace arrays)			//
-	//////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////
+	//		Nothing should need editing below this point		//
+	//		(OK, maybe JUST the find and replace arrays)		//
+	//////////////////////////////////////////////////////////////////////////
 	
 	//	Arrays of elements to replace for TS3 message string
 	$find = array(" ","&","'");
 	$replace = array("\s","\&","\'");
 	
 	//	connection = Open socket to ( host, port, rtnErrNo, rtnErrStr, timeout )
-	$conn = fsockopen("$clientHost", $clientPort, $errno, $errstr, 10);	
+	$conn = fsockopen("$clientHost", $clientPort, $errno, $errstr, 10);
 	
 	function getLine()
 		{
@@ -107,7 +109,7 @@
 			die("Suiciding: Not TS3! \"" . $temp . "\"\n");
 		}
 		else
-		{	
+		{
 			//	Appears to be TS3, dumping unwanted lines from welcome message
 			getLine();
 			getLine();
@@ -138,7 +140,7 @@
 			$temp = explode( " ", getLine() );
 			successful();	// Somewhere between checking the command worked, and just dumping a useless line
 			//	CLID = first array item, after 5th char
-			$clid = substr( $temp[0], 5);
+			$clid = substr($temp[0], 5);
 			echo $thisHandler . " has CLID: " . $clid . "\n";
 			
 			//	Find and check our Unique ID
